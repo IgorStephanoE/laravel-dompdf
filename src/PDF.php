@@ -239,16 +239,13 @@ class PDF
         $this->rendered = true;
     }
 
-
-    public function setEncryption($password)
-    {
-        if (!$this->dompdf) {
-            throw new Exception("DOMPDF not created yet");
-        }
-        $this->render();
-        return $this->dompdf->getCanvas()->get_cpdf()->setEncryption("pass", $password);
+    public function setEncryption($userPass = '', $ownerPass = '', $pc = []) {
+       if (!$this->dompdf) {
+           throw new Exception("DOMPDF not created yet");
+       }
+       $this->render();
+       return $this->dompdf->getCanvas()->get_cpdf()->setEncryption($userPass, $ownerPass, $pc);
     }
-
 
     protected function convertEntities($subject)
     {
